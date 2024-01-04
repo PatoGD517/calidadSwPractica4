@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tools{
+    tools {
         maven 'Maven'
     }
     stages {
@@ -11,17 +11,22 @@ pipeline {
             }
         }
         stage('SonarQube Analysis') {
-            def mvnHome =  tool name: 'maven-3', type: 'maven'
-            withSonarQubeEnv('SonarQube') { 
-              sh "${mvnHome}/bin/mvn sonar:sonar"
+            steps {
+                script {
+                    def mvnHome = tool name: 'maven-3', type: 'maven'
+                    withSonarQubeEnv('SonarQube') {
+                        sh "${mvnHome}/bin/mvn sonar:sonar"
+                    }
+                }
             }
         }
     }
-    post{
-        always{
+    post {
+        always {
             junit(
-                allowEmptyResults:true,
-                testResults: '*test-reports/.xml')
+                allowEmptyResults: true,
+                testResults: '*test-reports/*.xml'
+            )
         }
     }
 }
