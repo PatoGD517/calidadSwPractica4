@@ -10,12 +10,20 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
-        
+        stage('SCM') {
+            steps {
+                checkout scm
+            }
+        }
         stage('SonarQube Analysis') {
-            def mvn = tool 'Default Maven';
-            withSonarQubeEnv() {
-              sh "echo 'Starting SonarQube Analysis...'"
-              sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=SonarQubeJenkins-Practica4 -Dsonar.projectName='SonarQubeJenkins-Practica4'"
+            steps {
+                script {
+                    def mvn = tool 'Maven';
+                    withSonarQubeEnv() {
+                        echo 'Starting SonarQube Analysis...'
+                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=SonarQubeJenkins-Practica4 -Dsonar.projectName='SonarQubeJenkins-Practica4'"
+                    }
+                }
             }
         }
     }
@@ -28,3 +36,4 @@ pipeline {
         }
     }
 }
+
