@@ -10,6 +10,12 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
+        stage('SonarQube Analysis') {
+            def mvnHome =  tool name: 'maven-3', type: 'maven'
+            withSonarQubeEnv('SonarQube') { 
+              sh "${mvnHome}/bin/mvn sonar:sonar"
+            }
+        }
     }
     post{
         always{
