@@ -15,14 +15,16 @@ pipeline {
                 checkout scm
             }
         }
-        stage('SonarQube Analysis') {
+        stage('Sonarqube') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
             steps {
-                script {
-                    def mvn = tool 'Maven';
-                    withSonarQubeEnv() {
-                        echo 'Starting SonarQube Analysis...'
-                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=SonarQubeJenkins-Practica4 -Dsonar.projectName='SonarQubeJenkins-Practica4'"
-                    }
+                withSonarQubeEnv('Sonarqube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
