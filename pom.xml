@@ -14,12 +14,12 @@
 	  <repository>
 		  <id>practica4-group</id>
 		  <name>practica4-group</name>
-		  <url>http://172.24.48.1:8081/repository/practica4-group/</url>
+		  <url>http://localhost:8081/repository/practica4-group/</url>
 	  </repository>
   </repositories>
 
   <properties>
-    <sonar.host.url>http://172.24.48.1:9000</sonar.host.url>
+    <sonar.host.url>http://localhost:9000</sonar.host.url>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
