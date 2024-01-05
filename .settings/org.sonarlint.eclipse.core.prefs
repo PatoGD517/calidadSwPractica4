@@ -1,7 +1,7 @@
 autoEnabled=true
-bindingSuggestionsDisabled=false
+bindingSuggestionsDisabled=true
 eclipse.preferences.version=1
 idePrefixKey=
-projectKey=com.calidadDelSofware\:practica4
+projectKey=practica4
 serverId=localhost
 sqPrefixKey=
