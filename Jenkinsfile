@@ -29,7 +29,7 @@ pipeline {
                 script {
                     withSonarQubeEnv('SonarQube') {
                         def sonarProjectKey = 'com.calidadDelSofware:practica4'
-                        sh "${SONARQUBE_HOME}/bin/sonar-scanner -Dsonar.projectKey=${sonarProjectKey} -X"
+                        sh "${SONARQUBE_HOME}/bin/sonar-scanner -Dsonar.java.binaries=target/classes -Dsonar.projectKey=${sonarProjectKey} -X"
                     }
                 }
             }
