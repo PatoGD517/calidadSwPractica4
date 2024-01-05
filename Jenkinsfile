@@ -28,8 +28,8 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQube') {
-                        // Ejecutar el análisis de SonarQube
-                        sh "${SONARQUBE_HOME}/bin/sonar-scanner -X"
+                        def sonarProjectKey = 'com.calidadDelSofware:practica4'
+                        sh "${SONARQUBE_HOME}/bin/sonar-scanner -Dsonar.projectKey=${sonarProjectKey} -X"
                     }
                 }
             }
