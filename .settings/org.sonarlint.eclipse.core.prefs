@@ -3,5 +3,5 @@ bindingSuggestionsDisabled=true
 eclipse.preferences.version=1
 idePrefixKey=
 projectKey=practica4
-serverId=localhost
+serverId=SonarQube
 sqPrefixKey=

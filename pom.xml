@@ -12,6 +12,7 @@
   
   <properties>
     <sonar.host.url>http://localhost:9000</sonar.host.url>
+     <sonar.login>squ_d85cf5f97785fcdc778ae3bd3dc1559d08076ec6</sonar.login>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   

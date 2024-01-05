@@ -1,4 +1,5 @@
-package com.calidadDelSofware.practica4;
+package com.calidaddelsoftware.practica4;
+
 
 import org.junit.Test;
 import static org.junit.Assert.*;
