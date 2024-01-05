@@ -10,11 +10,10 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
                 script {
                     // Puedes realizar acciones de construcción aquí
-                    echo 'Hello World'
                     sh "mvn -Dmaven.test.failure.ignore=true clean package"
                 }
             }
