@@ -3,11 +3,20 @@ pipeline {
     tools {
         maven 'Maven'
     }
+    
+    environment {
+        SONARQUBE_HOME = tool 'SonarQubeScanner'
+        // Puedes agregar otras variables de entorno necesarias aquí
+    }
+
     stages {
         stage('Build') {
             steps {
-                echo 'Hello World'
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                script {
+                    // Puedes realizar acciones de construcción aquí
+                    echo 'Hello World'
+                    sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                }
             }
         }
         stage('SCM') {
@@ -15,27 +24,23 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Sonarqube') {
-            environment {
-                scannerHome = tool 'SonarQubeScanner'
-            }
+        stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('Sonarqube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
-                timeout(time: 10, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                script {
+                    withSonarQubeEnv('SonarQube') {
+                        // Ejecutar el análisis de SonarQube
+                        sh "${SONARQUBE_HOME}/bin/sonar-scanner -X"
+                    }
                 }
             }
         }
     }
     post {
         always {
-            junit(
-                allowEmptyResults: true,
-                testResults: '*test-reports/*.xml'
-            )
+            // Puedes agregar acciones posteriores aquí, como la publicación de informes o notificaciones
+            junit(allowEmptyResults: true, testResults: '*test-reports/*.xml')
         }
     }
 }
+
 
